@@ -1,0 +1,17 @@
+﻿{
+	'name' : 'rnd04/pagination',
+	'autoload' : {
+		'psr-4' : {
+			'Rnd04\\Pagination' : 'modern'
+		}
+	}
+	'repositories' : [
+		{
+			'type' : 'vcs',
+			'url' : 'https://github.com/rnd04/Pagination.git'
+		}
+	],
+	'require' : {
+		'php' : '>=5.3.0'
+	}
+}
