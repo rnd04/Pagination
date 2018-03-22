@@ -82,7 +82,7 @@ class Pagination
      * @param int $now
      * @param int $total : total number of list item
      */
-    public function __construct(int $size, int $psize, string $type, int $now, int $total, string $base_url)
+    public function __construct($size, $psize, $type, $now, $total, $base_url)
     {
         $this->now = $now;
         $this->size = $size;

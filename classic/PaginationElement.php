@@ -8,7 +8,12 @@ class PaginationElement
     public $index;
     public $url;
 
-    public function __construct(string $base_url, string $field, int $index)
+	/**
+	 * @param string $base_url : base url of every page link
+	 * @param string $field : get parameter name of page index
+	 * @param int $index : value of page index
+	 */
+    public function __construct($base_url, $field, $index)
     {
         $d = strpos($base_url, '?') ? '&': '?';
 
