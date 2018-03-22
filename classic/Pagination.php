@@ -19,12 +19,6 @@ class Pagination
     const TYPE_CENTERED = 'centered';
 
     /**
-     * get parameter name of page index
-     * @var string
-     */
-    public $field = 'page';
-
-    /**
      * current page index
      * @var int
      */
@@ -88,7 +82,7 @@ class Pagination
      * @param int $now
      * @param int $total : total number of list item
      */
-    public function __construct($size, $psize, $type, $now, $total, $base_url)
+    public function __construct($size, $psize, $type, $now, $total, $base_url, $field='page')
     {
         $this->now = $now;
         $this->size = $size;
@@ -114,19 +108,14 @@ class Pagination
             $last = $chunk * $psize > $ptotal ? $ptotal : $chunk * $psize;
 
             foreach (range($first, $last) as $i) {
-                $this->list[]= new PaginationElement($base_url, $this->field, $i);
+                $this->list[]= new PaginationElement($base_url, $field, $i);
             }
 
-            $this->pfirst = $chunk == 1 ? null : new PaginationElement($base_url, $this->field, 1);
-            $this->plast = $last == $ptotal ? null : new PaginationElement($base_url, $this->field, $ptotal);
-            $this->pprev = $chunk == 1 ? null : new PaginationElement($base_url, $this->field, ($chunk - 2) * $psize + 1);
-            $this->pnext = $last == $ptotal ? null : new PaginationElement($base_url, $this->field, $last + 1);
+            $this->pfirst = $chunk == 1 ? null : new PaginationElement($base_url, $field, 1);
+            $this->plast = $last == $ptotal ? null : new PaginationElement($base_url, $field, $ptotal);
+            $this->pprev = $chunk == 1 ? null : new PaginationElement($base_url, $field, ($chunk - 2) * $psize + 1);
+            $this->pnext = $last == $ptotal ? null : new PaginationElement($base_url, $field, $last + 1);
         }
-    }
-
-    public function setField($field)
-    {
-        $this->field = $field;
     }
 
     public function isOutOfBound()
