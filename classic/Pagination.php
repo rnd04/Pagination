@@ -19,6 +19,12 @@ class Pagination
     const TYPE_CENTERED = 'centered';
 
     /**
+     * get parameter name of page index
+     * @var string
+     */
+    public $field = 'page';
+
+    /**
      * current page index
      * @var int
      */
@@ -108,14 +114,19 @@ class Pagination
             $last = $chunk * $psize > $ptotal ? $ptotal : $chunk * $psize;
 
             foreach (range($first, $last) as $i) {
-                $this->list[]= new PaginationElement($base_url, 'page', $i);
+                $this->list[]= new PaginationElement($base_url, $this->field, $i);
             }
 
-            $this->pfirst = $chunk == 1 ? null : new PaginationElement($base_url, 'page', 1);
-            $this->plast = $last == $ptotal ? null : new PaginationElement($base_url, 'page', $ptotal);
-            $this->pprev = $chunk == 1 ? null : new PaginationElement($base_url, 'page', ($chunk - 2) * $psize + 1);
-            $this->pnext = $last == $ptotal ? null : new PaginationElement($base_url, 'page', $last + 1);
+            $this->pfirst = $chunk == 1 ? null : new PaginationElement($base_url, $this->field, 1);
+            $this->plast = $last == $ptotal ? null : new PaginationElement($base_url, $this->field, $ptotal);
+            $this->pprev = $chunk == 1 ? null : new PaginationElement($base_url, $this->field, ($chunk - 2) * $psize + 1);
+            $this->pnext = $last == $ptotal ? null : new PaginationElement($base_url, $this->field, $last + 1);
         }
+    }
+
+    public function setField($field)
+    {
+        $this->field = $field;
     }
 
     public function isOutOfBound()
@@ -135,4 +146,3 @@ class Pagination
         return false;
     }
 }
-
